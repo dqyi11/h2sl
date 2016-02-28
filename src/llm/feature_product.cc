@@ -53,6 +53,7 @@
 #include "h2sl/feature_spatial_function_matches_child.h"
 #include "h2sl/feature_spatial_function_object_matches_child.h"
 #include "h2sl/feature_spatial_function_child_matches_child.h"
+#include "h2sl/feature_spatial_function_merge_objects.h"
 
 #include "h2sl/feature_product.h"
 
@@ -286,6 +287,9 @@ from_xml( xmlNodePtr root ){
                 _feature_groups.back().back()->from_xml( l2 );
               } else if ( xmlStrcmp( l2->name, ( const xmlChar* )( "feature_spatial_function_child_matches_child" ) ) == 0 ){
                   _feature_groups.back().push_back( new Feature_Spatial_Function_Child_Matches_Child() );
+                  _feature_groups.back().back()->from_xml( l2 );
+              } else if ( xmlStrcmp( l2->name, ( const xmlChar* )( "feature_spatial_function_merge_objects" ) ) == 0 ){
+                  _feature_groups.back().push_back( new Feature_Spatial_Function_Merge_Objects() );
                   _feature_groups.back().back()->from_xml( l2 );
               } else {
                 cout << "could not load feature " << l2->name << endl;
