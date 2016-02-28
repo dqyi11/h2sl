@@ -49,6 +49,11 @@
 #include "h2sl/feature_constraint_child_matches_child_region.h"
 #include "h2sl/feature_constraint_parent_is_robot.h"
 #include "h2sl/feature_constraint_child_is_robot.h"
+#include "h2sl/feature_object_matches_child.h"
+#include "h2sl/feature_spatial_function.h"
+#include "h2sl/feature_spatial_function_matches_child.h"
+#include "h2sl/feature_spatial_function_object_matches_child.h"
+#include "h2sl/feature_spatial_function_child_matches_child.h"
 
 #include "h2sl/feature.h"
 
@@ -111,9 +116,18 @@ namespace h2sl {
       out << *static_cast< const Feature_Constraint_Parent_Is_Robot* >( &other );
     } else if( dynamic_cast< const Feature_Constraint_Child_Is_Robot* >( &other ) != NULL ){
       out << *static_cast< const Feature_Constraint_Child_Is_Robot* >( &other );
+    } else if( dynamic_cast< const Feature_Object_Matches_Child* >( &other ) != NULL ){
+      out << *static_cast< const Feature_Object_Matches_Child* >( &other );
+    } else if( dynamic_cast< const Feature_Spatial_Function* >( &other ) != NULL ){
+      out << *static_cast< const Feature_Spatial_Function* >( &other );
+    } else if( dynamic_cast< const Feature_Spatial_Function_Matches_Child* >( &other ) != NULL ){
+      out << *static_cast< const Feature_Spatial_Function_Matches_Child* >( &other );
+    } else if( dynamic_cast< const Feature_Spatial_Function_Child_Matches_Child* >( &other ) != NULL ){
+      out << *static_cast< const Feature_Spatial_Function_Child_Matches_Child* >( &other );
+    } else if( dynamic_cast< const Feature_Spatial_Function_Object_Matches_Child* >( &other ) != NULL ){
+      out << *static_cast< const Feature_Spatial_Function_Object_Matches_Child* >( &other );
     } else {
-      out << "unknown feature";
-      //assert( false );
+      assert( false );
     } 
     return out;
   }

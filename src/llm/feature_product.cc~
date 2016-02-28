@@ -268,21 +268,6 @@ from_xml( xmlNodePtr root ){
               } else if ( xmlStrcmp( l2->name, ( const xmlChar* )( "feature_constraint_child_is_robot" ) ) == 0 ){
                 _feature_groups.back().push_back( new Feature_Constraint_Child_Is_Robot() );
                 _feature_groups.back().back()->from_xml( l2 );
-              } else if ( xmlStrcmp( l2->name, ( const xmlChar* )( "feature_object_matches_child" ) ) == 0 ){
-                _feature_groups.back().push_back( new Feature_Object_Matches_Child() );
-                _feature_groups.back().back()->from_xml( l2 );
-              } else if ( xmlStrcmp( l2->name, ( const xmlChar* )( "feature_spatial_function" ) ) == 0 ){
-                _feature_groups.back().push_back( new Feature_Spatial_Function() );
-                _feature_groups.back().back()->from_xml( l2 );
-              } else if ( xmlStrcmp( l2->name, ( const xmlChar* )( "feature_spatial_function_matches_child" ) ) == 0 ){
-                _feature_groups.back().push_back( new Feature_Spatial_Function_Matches_Child() );
-                _feature_groups.back().back()->from_xml( l2 );
-              } else if ( xmlStrcmp( l2->name, ( const xmlChar* )( "feature_spatial_function_object_matches_child" ) ) == 0 ){
-                _feature_groups.back().push_back( new Feature_Spatial_Function_Object_Matches_Child() );
-                _feature_groups.back().back()->from_xml( l2 );
-              } else if ( xmlStrcmp( l2->name, ( const xmlChar* )( "feature_spatial_function_child_matches_child" ) ) == 0 ){
-                  _feature_groups.back().push_back( new Feature_Spatial_Function_Child_Matches_Child() );
-                  _feature_groups.back().back()->from_xml( l2 );
               } else {
                 cout << "could not load feature " << l2->name << endl;
               } 

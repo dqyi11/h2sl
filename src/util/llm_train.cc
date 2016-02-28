@@ -37,6 +37,8 @@
 #include "h2sl/grounding_set.h"
 #include "h2sl/region.h"
 #include "h2sl/constraint.h"
+#include "h2sl/object.h"
+#include "h2sl/spatial_function.h"
 #include "h2sl/llm.h"
 #include "h2sl/dcg.h"
 #include "llm_train_cmdline.h"
@@ -64,7 +66,12 @@ evaluate_model( LLM* llm,
         cout << "  grounding:" << *static_cast< const Region* >( examples[ i ].second.grounding() ) << endl; 
       } else if ( dynamic_cast< const Constraint* >( examples[ i ].second.grounding() ) != NULL ){
         cout << "  grounding:" << *static_cast< const Constraint* >( examples[ i ].second.grounding() ) << endl; 
+      } else if ( dynamic_cast< const Object* >( examples[ i ].second.grounding() ) != NULL ) {
+        cout << " grounding:" << *static_cast< const Object* >( examples[ i ].second.grounding() ) << endl;
+      } else if ( dynamic_cast< const Spatial_Function* >( examples[ i ].second.grounding() ) != NULL ){
+        cout << "  grounding:" << *static_cast< const Spatial_Function* >( examples[ i ].second.grounding() ) << endl;
       }
+
       for( unsigned int j = 0; j < examples[ i ].second.children().size(); j++ ){
         if( examples[ i ].second.children()[ j ].first != NULL ){
           cout << "child phrase:(" << *examples[ i ].second.children()[ j ].first << ")" << endl;
@@ -74,6 +81,10 @@ evaluate_model( LLM* llm,
             cout << "children[" << j << "]:" << *static_cast< Region* >( examples[ i ].second.children()[ j ].second[ k ] ) << endl;
           } else if( dynamic_cast< Constraint* >( examples[ i ].second.children()[ j ].second[ k ] ) != NULL ){
             cout << "children[" << j << "]:" << *static_cast< Constraint* >( examples[ i ].second.children()[ j ].second[ k ] ) << endl;
+          } else if( dynamic_cast< Spatial_Function* >( examples[ i ].second.children()[ j ].second[ k ] ) != NULL ){
+            cout << "children[" << j << "]:" << *static_cast< Spatial_Function* >( examples[ i ].second.children()[ j ].second[ k ] ) << endl;
+          } else if( dynamic_cast< Object* >( examples[ i ].second.children()[ j ].second[ k ] ) != NULL ){
+            cout << "children[" << j << "]:" << *static_cast< Object* >( examples[ i ].second.children()[ j ].second[ k ] ) << endl;
           }
         }
       }
@@ -117,7 +128,33 @@ evaluate_cv( const Grounding* grounding,
         }
       }
     }
-  }   
+  } else if ( dynamic_cast< const Object* >( grounding ) != NULL ) {
+    const h2sl::Object* object_grounding = dynamic_cast< const h2sl::Object* >( grounding );
+    cv = CV_FALSE;
+    for( unsigned int i = 0; i < groundingSet->groundings().size(); i++ ){
+      if( dynamic_cast< const h2sl::Object* >( groundingSet->groundings()[ i ] ) ){
+        if( *object_grounding == *dynamic_cast< const h2sl::Object* >( groundingSet->groundings()[ i ] ) ){
+          cout << "Object match" << endl;
+          cv = CV_TRUE;
+        }
+      }
+    }
+  } else if ( dynamic_cast< const Spatial_Function* >( grounding ) != NULL ){
+    const Spatial_Function* spatial_function_grounding = dynamic_cast< const Spatial_Function* >( grounding );
+    cv = CV_FALSE;
+    for( unsigned int i = 0; i < groundingSet->groundings().size(); i++ ){
+      if( dynamic_cast< const Spatial_Function* >( groundingSet->groundings()[ i ] ) ){
+        const Spatial_Function* other_spatial_function_grounding = dynamic_cast< const Spatial_Function* >( groundingSet->groundings()[ i ] );
+        //cout << "before spatial function comparison" << endl;
+        //cout << "first " << spatial_function_grounding->type() << endl;
+        //cout << "other " << other_spatial_function_grounding->type() << endl;
+        if( *spatial_function_grounding == *other_spatial_function_grounding ){
+          cout << "Spatial function match" << endl;
+          cv = CV_TRUE;
+        }  
+      }
+    }
+  }     
  
   return cv;
 }

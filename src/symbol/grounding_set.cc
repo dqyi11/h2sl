@@ -34,6 +34,7 @@
 #include "h2sl/object.h"
 #include "h2sl/region.h"
 #include "h2sl/constraint.h"
+#include "h2sl/spatial_function.h"
 
 #include "h2sl/grounding_set.h"
 
@@ -156,8 +157,12 @@ from_xml( xmlNodePtr root ){
         } else if ( xmlStrcmp( l1->name, ( const xmlChar* )( "constraint" ) ) == 0 ){
           _groundings.push_back( new Constraint() );
           _groundings.back()->from_xml( l1 );
-        } 
-      }
+        } else if ( xmlStrcmp( l1->name, ( const xmlChar* )( "spatial_function" ) ) == 0 ){
+          cout << "Find grounding of spatial_function " << endl;
+          _groundings.push_back( new Spatial_Function() );
+          _groundings.back()->from_xml( l1 );
+        }
+      } 
     }
   }
   return;

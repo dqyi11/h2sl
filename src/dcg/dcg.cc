@@ -38,6 +38,8 @@
 #include "h2sl/grounding_set.h"
 #include "h2sl/region.h"
 #include "h2sl/constraint.h"
+#include "h2sl/spatial_function.h"
+
 #include "h2sl/dcg.h"
 
 using namespace std;
@@ -113,6 +115,11 @@ fill_search_spaces( const World* world ){
     }
   }
 
+  // add objects
+  for( unsigned int i = 0; i < world->objects().size(); i++ ) {
+    _search_spaces.push_back( pair< unsigned int, h2sl::Grounding* >( 0, world->objects()[ i ] ) );
+  }
+
   // add the PP groundings
   for( unsigned int i = 0; i < NUM_REGION_TYPES; i++ ){
     if( i != REGION_TYPE_UNKNOWN ){
@@ -136,6 +143,40 @@ fill_search_spaces( const World* world ){
         }
       }
     }
+  }
+
+  // add spatial relations
+  std::vector< Spatial_Function* > child_avoid_funcs;
+  for( unsigned int j = 0; j < world->objects().size(); j++ ) {
+    std::vector< Object > objects;
+    objects.push_back( *( world->objects()[ j ] ) );
+    for( unsigned int i = SPATIAL_FUNC_TYPE_LEFT_OF; i <= SPATIAL_FUNC_TYPE_BOTTOM_OF; i++ ){
+      _search_spaces.push_back( pair< unsigned int, Grounding* >( 0, new Spatial_Function( i, objects ) ) );
+      child_avoid_funcs.push_back( new Spatial_Function( i, objects ) );
+    }
+  }
+
+  // UNKNOWN OBJECT FOR SPATIAL RELATION TYPE 
+  for( unsigned int i = SPATIAL_FUNC_TYPE_LEFT_OF; i <= SPATIAL_FUNC_TYPE_BOTTOM_OF; i++ ){
+    std::vector< Object > objects;
+    objects.push_back( Object() );
+    _search_spaces.push_back( pair< unsigned int, Grounding* >( 0, new Spatial_Function( i, objects ) ) );
+  }
+ 
+  for( unsigned int i = 0; i < world->objects().size(); i++ ) {
+    for( unsigned int j = 0; j < i; j++ ) {
+      std::vector< h2sl::Object > objects;
+      objects.push_back( *( world->objects()[ i ] ) );
+      objects.push_back( *( world->objects()[ j ] ) );
+      _search_spaces.push_back( pair< unsigned int, Grounding* >( 0, new Spatial_Function( SPATIAL_FUNC_TYPE_IN_BETWEEN, objects ) ) );
+      child_avoid_funcs.push_back( new Spatial_Function( SPATIAL_FUNC_TYPE_IN_BETWEEN, objects ) );
+    }
+  }
+  
+  for( unsigned int i = 0; i < child_avoid_funcs.size(); i ++ ) {
+    Spatial_Function* p_avoid_func = new Spatial_Function( SPATIAL_FUNC_TYPE_AVOID );
+    p_avoid_func->set_child_function( child_avoid_funcs[ i ] );
+    _search_spaces.push_back( pair< unsigned int, Grounding* >( 0, p_avoid_func ) );
   }
 
   return;

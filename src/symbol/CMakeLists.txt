@@ -14,6 +14,7 @@ set(HDRS
     h2sl/object.h
     h2sl/region.h
     h2sl/constraint.h
+    h2sl/spatial_function.h
     h2sl/world.h)
 
 # QT HEADER FILES
@@ -26,6 +27,7 @@ set(SRCS
     object.cc
     region.cc
     constraint.cc
+    spatial_function.cc
     world.cc)
 
 # BINARY SOURCE FILES

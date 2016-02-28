@@ -37,6 +37,7 @@
 #include "h2sl/region.h"
 #include "h2sl/constraint.h"
 #include "h2sl/grounding_set.h"
+#include "h2sl/spatial_function.h"
 
 using namespace std;
 using namespace h2sl;
@@ -123,6 +124,8 @@ namespace h2sl {
       out << *static_cast< const Region* >( &other );
     } else if( dynamic_cast< const Constraint* >( &other ) != NULL ){
       out << *static_cast< const Constraint* >( &other );
+    } else if( dynamic_cast< const Spatial_Function* >( &other ) != NULL ){
+      out << *static_cast< const Spatial_Function* >( &other );
     }
     return out;
   }
