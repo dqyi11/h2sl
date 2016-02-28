@@ -26,6 +26,7 @@ set(HDRS
     h2sl/feature_constraint_child_is_robot.h
     h2sl_hdcg/feature_object_matches_child.h
     h2sl_hdcg/feature_spatial_function.h
+    h2sl_hdcg/feature_spatial_function_object.h
     h2sl_hdcg/feature_spatial_function_matches_child.h
     h2sl_hdcg/feature_spatial_function_object_matches_child.h
     h2sl_hdcg/feature_spatial_function_child_matches_child.h
@@ -55,6 +56,7 @@ set(SRCS
     feature_constraint_child_is_robot.cc
     feature_object_matches_child.cc
     feature_spatial_function.cc
+    feature_spatial_function_object.cc
     feature_spatial_function_matches_child.cc
     feature_spatial_function_object_matches_child.cc
     feature_spatial_function_child_matches_child.cc

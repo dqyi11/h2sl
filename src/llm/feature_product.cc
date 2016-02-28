@@ -49,6 +49,7 @@
 #include "h2sl/feature_constraint_child_is_robot.h"
 #include "h2sl/feature_object_matches_child.h"
 #include "h2sl/feature_spatial_function.h"
+#include "h2sl/feature_spatial_function_object.h"
 #include "h2sl/feature_spatial_function_matches_child.h"
 #include "h2sl/feature_spatial_function_object_matches_child.h"
 #include "h2sl/feature_spatial_function_child_matches_child.h"
@@ -273,6 +274,9 @@ from_xml( xmlNodePtr root ){
                 _feature_groups.back().back()->from_xml( l2 );
               } else if ( xmlStrcmp( l2->name, ( const xmlChar* )( "feature_spatial_function" ) ) == 0 ){
                 _feature_groups.back().push_back( new Feature_Spatial_Function() );
+                _feature_groups.back().back()->from_xml( l2 );
+              } else if ( xmlStrcmp( l2->name, ( const xmlChar* )( "feature_spatial_function_object" ) ) == 0 ){
+                _feature_groups.back().push_back( new Feature_Spatial_Function_Object() );
                 _feature_groups.back().back()->from_xml( l2 );
               } else if ( xmlStrcmp( l2->name, ( const xmlChar* )( "feature_spatial_function_matches_child" ) ) == 0 ){
                 _feature_groups.back().push_back( new Feature_Spatial_Function_Matches_Child() );
