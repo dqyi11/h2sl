@@ -66,6 +66,8 @@ namespace h2sl {
     std::vector< Object > _objects;
     Spatial_Function* _p_child_function;
   };
+  
+  std::ostream& operator<<( std::ostream& out, const Spatial_Function& other );
 }
 
 #endif /* H2SL_SPATIAL_FUNCTION_H */

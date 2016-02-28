@@ -158,7 +158,7 @@ from_xml( xmlNodePtr root ){
           _groundings.push_back( new Constraint() );
           _groundings.back()->from_xml( l1 );
         } else if ( xmlStrcmp( l1->name, ( const xmlChar* )( "spatial_function" ) ) == 0 ){
-          cout << "Find grounding of spatial_function " << endl;
+          //cout << "Find grounding of spatial_function " << endl;
           _groundings.push_back( new Spatial_Function() );
           _groundings.back()->from_xml( l1 );
         }

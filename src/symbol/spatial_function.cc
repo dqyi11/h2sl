@@ -16,12 +16,12 @@ using namespace std;
 using namespace h2sl;
 
 Spatial_Function::Spatial_Function( const unsigned int& type, 
-                                    const std::vector< h2sl::Object >& objects ) : _type( type ), _objects( objects ) {
+                                    const std::vector< Object >& objects ) : _type( type ), _objects( objects ) {
   _p_child_function = NULL;
 }
 
 Spatial_Function::Spatial_Function( const spatial_func_type_t& type, 
-                                    const std::vector< h2sl::Object >& objects ) : _type( type ), _objects( objects ) {
+                                    const std::vector< Object >& objects ) : _type( type ), _objects( objects ) {
   _p_child_function = NULL;
 }
  
@@ -62,7 +62,7 @@ bool Spatial_Function::operator!=( const Spatial_Function& other ) const {
   return !( *this == other );
 }
 
-h2sl::Grounding* Spatial_Function::dup( void ) const {
+Grounding* Spatial_Function::dup( void ) const {
   return new Spatial_Function( *this );
 }
 
@@ -178,15 +178,17 @@ void Spatial_Function::from_xml( xmlNodePtr root ) {
 }
 
 namespace h2sl {
-  ostream&
-  operator<<( ostream& out, const Spatial_Function& other ) {
+  ostream& operator<<( ostream& out, const Spatial_Function& other ) {
     out << "Spatial_Function(";
     out << "type=\"" << Spatial_Function::type_to_std_string( other.type() ) << "\",";
     out << "objects="; 
     for( unsigned int i = 0; i < other.objects().size(); i ++ ){
       out << "secondary=" << other.objects()[ i ];
+    } 
+    if( other.child_function() != NULL ) {
+      out << ",function=[" << *(other.child_function()) << "]"; 
     }
-    out << ")";
+    out << ")"; 
     return out;
   }
 }
