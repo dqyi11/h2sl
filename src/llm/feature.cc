@@ -111,6 +111,14 @@ namespace h2sl {
       out << *static_cast< const Feature_Constraint_Parent_Is_Robot* >( &other );
     } else if( dynamic_cast< const Feature_Constraint_Child_Is_Robot* >( &other ) != NULL ){
       out << *static_cast< const Feature_Constraint_Child_Is_Robot* >( &other );
+    } else if( dynamic_cast< const h2sl_hdcg::Feature_Spatial_Function* >( &other ) != NULL ){
+      out << *static_cast< const h2sl_hdcg::Feature_Spatial_Function* >( &other );
+    } else if( dynamic_cast< const h2sl_hdcg::Feature_Spatial_Function_Matches_Child* >( &other ) != NULL ){
+      out << *static_cast< const h2sl_hdcg::Feature_Spatial_Function_Matches_Child* >( &other );
+    } else if( dynamic_cast< const h2sl_hdcg::Feature_Spatial_Function_Object_Matches_Child* >( &other ) != NULL ){
+      out << *static_cast< const h2sl_hdcg::Feature_Spatial_Function_Object_Matches_Child* >( &other );
+    } else if( dynamic_cast< const h2sl_hdcg::Feature_Spatial_Function_Child_Matches_Child* >( &other ) != NULL ){
+      out << *static_cast< const h2sl_hdcg::Feature_Spatial_Function_Child_Matches_Child* >( &other );
     } else {
       assert( false );
     } 
