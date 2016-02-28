@@ -134,7 +134,6 @@ evaluate_cv( const Grounding* grounding,
     for( unsigned int i = 0; i < groundingSet->groundings().size(); i++ ){
       if( dynamic_cast< const h2sl::Object* >( groundingSet->groundings()[ i ] ) ){
         if( *object_grounding == *dynamic_cast< const h2sl::Object* >( groundingSet->groundings()[ i ] ) ){
-          cout << "Object match" << endl;
           cv = CV_TRUE;
         }
       }
@@ -145,11 +144,7 @@ evaluate_cv( const Grounding* grounding,
     for( unsigned int i = 0; i < groundingSet->groundings().size(); i++ ){
       if( dynamic_cast< const Spatial_Function* >( groundingSet->groundings()[ i ] ) ){
         const Spatial_Function* other_spatial_function_grounding = dynamic_cast< const Spatial_Function* >( groundingSet->groundings()[ i ] );
-        //cout << "before spatial function comparison" << endl;
-        //cout << "first " << spatial_function_grounding->type() << endl;
-        //cout << "other " << other_spatial_function_grounding->type() << endl;
         if( *spatial_function_grounding == *other_spatial_function_grounding ){
-          cout << "Spatial function match" << endl;
           cv = CV_TRUE;
         }  
       }

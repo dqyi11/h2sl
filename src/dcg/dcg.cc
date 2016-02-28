@@ -117,7 +117,7 @@ fill_search_spaces( const World* world ){
 
   // add objects
   for( unsigned int i = 0; i < world->objects().size(); i++ ) {
-    _search_spaces.push_back( pair< unsigned int, h2sl::Grounding* >( 0, world->objects()[ i ] ) );
+    _search_spaces.push_back( pair< unsigned int, Grounding* >( 0, world->objects()[ i ] ) );
   }
 
   // add the PP groundings

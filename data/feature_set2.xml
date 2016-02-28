@@ -94,7 +94,6 @@
         <feature_object invert="0" object_type="16"/>
         <feature_object invert="0" object_type="17"/>
         <feature_object invert="0" object_type="18"/>
-        <feature_region_object invert="0" object_type="18"/>
         <feature_region_object invert="0" object_type="1"/>
         <feature_region_object invert="0" object_type="2"/>
         <feature_region_object invert="0" object_type="3"/>
@@ -142,11 +141,8 @@
         <feature_spatial_function invert="0" spatial_function_type="3"/>
         <feature_spatial_function invert="0" spatial_function_type="4"/>
         <feature_spatial_function_matches_child invert="0"/>
-        <feature_spatial_function_matches_child invert="1"/>
         <feature_spatial_function_object_matches_child invert="0"/>
-        <feature_spatial_function_object_matches_child invert="1"/>
         <feature_spatial_function_child_matches_child invert="0"/>
-        <feature_spatial_function_child_matches_child invert="1"/>
       </feature_group>
     </feature_product>
   </feature_set>

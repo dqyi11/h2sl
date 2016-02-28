@@ -35,7 +35,10 @@
 #include <sys/time.h>
 #include "h2sl/common.h"
 #include "h2sl/phrase.h"
+#include "h2sl/object.h"
+#include "h2sl/region.h"
 #include "h2sl/constraint.h"
+#include "h2sl/spatial_function.h"
 #include "h2sl/grounding_set.h"
 #include "h2sl/parser_cyk.h"
 #include "h2sl/dcg.h"
@@ -87,6 +90,48 @@ compare_phrases( const Phrase* first,
               if( dynamic_cast< const Constraint* >( second_grounding_set->groundings()[ j ] ) != NULL ){
                 const Constraint* second_grounding_constraint = static_cast< const Constraint* >( second_grounding_set->groundings()[ j ] );
                 if( *first_grounding_constraint == *second_grounding_constraint ){
+                  found_match = true;
+                }
+              }
+            }
+            if( !found_match ){
+              return false;
+            }
+          } else if( dynamic_cast< const Region* >( first_grounding_set->groundings()[ i ] ) != NULL ){
+            const Region* first_grounding_region = static_cast< const Region* >( first_grounding_set->groundings()[ i ] );
+            bool found_match = false;
+            for( unsigned int j = 0; j < second_grounding_set->groundings().size(); j++ ){
+              if( dynamic_cast< const Region* >( second_grounding_set->groundings()[ j ] ) != NULL ){
+                const Region* second_grounding_region = static_cast< const Region* >( second_grounding_set->groundings()[ j ] );
+                if( *first_grounding_region == *second_grounding_region ){
+                  found_match = true;
+                }
+              }
+            }
+            if( !found_match ){
+              return false;
+            }
+          } else if( dynamic_cast< const Object* >( first_grounding_set->groundings()[ i ] ) != NULL ){
+            const Object* first_grounding_object = static_cast< const Object* >( first_grounding_set->groundings()[ i ] );
+            bool found_match = false;
+            for( unsigned int j = 0; j < second_grounding_set->groundings().size(); j++ ){
+              if( dynamic_cast< const Object* >( second_grounding_set->groundings()[ j ] ) != NULL ){
+                const Object* second_grounding_object = static_cast< const Object* >( second_grounding_set->groundings()[ j ] );
+                if( *first_grounding_object == *second_grounding_object ){
+                  found_match = true;
+                }
+              }
+            }
+            if( !found_match ){
+              return false;
+            }
+          } else if( dynamic_cast< const Spatial_Function* >( first_grounding_set->groundings()[ i ] ) != NULL ){
+            const Spatial_Function* first_grounding_spatial_function = static_cast< const Spatial_Function* >( first_grounding_set->groundings()[ i ] );
+            bool found_match = false;
+            for( unsigned int j = 0; j < second_grounding_set->groundings().size(); j++ ){
+              if( dynamic_cast< const Spatial_Function* >( second_grounding_set->groundings()[ j ] ) != NULL ){
+                const Spatial_Function* second_grounding_spatial_function = static_cast< const Spatial_Function* >( second_grounding_set->groundings()[ j ] );
+                if( *first_grounding_spatial_function == *second_grounding_spatial_function ){
                   found_match = true;
                 }
               }
