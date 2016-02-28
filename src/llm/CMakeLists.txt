@@ -24,12 +24,13 @@ set(HDRS
     h2sl/feature_constraint_child_matches_child_region.h
     h2sl/feature_constraint_parent_is_robot.h
     h2sl/feature_constraint_child_is_robot.h
-    h2sl_hdcg/feature_object_matches_child.h
-    h2sl_hdcg/feature_spatial_function.h
-    h2sl_hdcg/feature_spatial_function_object.h
-    h2sl_hdcg/feature_spatial_function_matches_child.h
-    h2sl_hdcg/feature_spatial_function_object_matches_child.h
-    h2sl_hdcg/feature_spatial_function_child_matches_child.h
+    h2sl/feature_object_matches_child.h
+    h2sl/feature_spatial_function.h
+    h2sl/feature_spatial_function_object.h
+    h2sl/feature_spatial_function_matches_child.h
+    h2sl/feature_spatial_function_object_matches_child.h
+    h2sl/feature_spatial_function_child_matches_child.h
+    h2sl/feature_spatial_function_merge_objects.h
     h2sl/feature_product.h
     h2sl/feature_set.h
     h2sl/llm.h)
@@ -60,6 +61,7 @@ set(SRCS
     feature_spatial_function_matches_child.cc
     feature_spatial_function_object_matches_child.cc
     feature_spatial_function_child_matches_child.cc
+    feature_spatial_function_merge_objects.cc
     feature_product.cc
     feature_set.cc
     llm.cc)

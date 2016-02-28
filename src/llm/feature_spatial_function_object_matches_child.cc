@@ -41,7 +41,7 @@ value( const unsigned int& cv,
     bool found_match = false;
     for( unsigned int i = 0; i < children.size(); i++ ){
       for( unsigned int j = 0; j < children[ i ].second.size(); j++ ){
-        const h2sl::Object * child = dynamic_cast< const h2sl::Object* >( children[ i ].second[ j ] );
+        const Object * child = dynamic_cast< const Object* >( children[ i ].second[ j ] );
         if( child != NULL ){
           for( unsigned int k = 0; k < spatial_function->objects().size(); k++ ) {
             if( spatial_function->objects()[ k ] == *child ){
