@@ -56,7 +56,7 @@
 #include "h2sl/feature_spatial_function_object_matches_child.h"
 #include "h2sl/feature_spatial_function_object_contains_child.h"
 #include "h2sl/feature_spatial_function_child_matches_child.h"
-#include "h2sl/feature_spatial_function_merge_objects.h"
+#include "h2sl/feature_spatial_function_merge_partially_known_spatial_functions.h"
 #include "h2sl/feature.h"
 
 using namespace std;
@@ -132,8 +132,8 @@ namespace h2sl {
       out << *static_cast< const Feature_Spatial_Function_Object_Matches_Child* >( &other );
     } else if( dynamic_cast< const Feature_Spatial_Function_Object_Contains_Child* >( &other ) != NULL ){
       out << *static_cast< const Feature_Spatial_Function_Object_Contains_Child* >( &other );
-    } else if( dynamic_cast< const Feature_Spatial_Function_Merge_Objects* >( &other ) != NULL ){
-      out << *static_cast< const Feature_Spatial_Function_Merge_Objects* >( &other );
+    } else if( dynamic_cast< const Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions* >( &other ) != NULL ){
+      out << *static_cast< const Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions* >( &other );
     } else {
       assert( false );
     } 

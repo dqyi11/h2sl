@@ -1,5 +1,5 @@
 /**
- * @file    feature_spatial_function_merge_objects.h
+ * @file    feature_spatial_function_merge_partially_known_spatial_functions.h
  * @author  Thomas M. Howard (tmhoward@csail.mit.edu)
  *          Matthew R. Walter (mwalter@csail.mit.edu)
  * @version 1.0
@@ -39,12 +39,12 @@
 #include <h2sl/feature.h>
 
 namespace h2sl {
-  class Feature_Spatial_Function_Merge_Objects: public Feature {
+  class Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions: public Feature {
   public:
-    Feature_Spatial_Function_Merge_Objects( const bool& invert = false );
-    virtual ~Feature_Spatial_Function_Merge_Objects();
-    Feature_Spatial_Function_Merge_Objects( const Feature_Spatial_Function_Merge_Objects& other );
-    Feature_Spatial_Function_Merge_Objects& operator=( const Feature_Spatial_Function_Merge_Objects& other );
+    Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions( const bool& invert = false );
+    virtual ~Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions();
+    Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions( const Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions& other );
+    Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions& operator=( const Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions& other );
 
     virtual bool value( const unsigned int& cv, const Grounding* grounding, const std::vector< std::pair< const Phrase*, std::vector< Grounding* > > >& children, const Phrase* phrase, const World* world );
 
@@ -59,7 +59,7 @@ namespace h2sl {
   private:
 
   };
-  std::ostream& operator<<( std::ostream& out, const Feature_Spatial_Function_Merge_Objects& other );
+  std::ostream& operator<<( std::ostream& out, const Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions& other );
 }
 
 #endif /* H2SL_FEATURE_SPATIAL_FUNCTION_MERGE_PARTIALLY_KNOWN_SPATIAL_FUNCTIONS_H */

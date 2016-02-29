@@ -195,6 +195,16 @@ bool Spatial_Function::contains_objects( const std::vector< Object >& objects ) 
   return contain;
 }
 
+bool Spatial_Function::contains_object_type( const int& type ) const {
+  for( unsigned int i = 0; i < _objects.size(); i++ ) {
+    Object obj = _objects[ i ];
+    if( obj.type() == type ) {
+      return true;
+    }
+  }
+  return false;
+}
+
 namespace h2sl {
   ostream& operator<<( ostream& out, const Spatial_Function& other ) {
     out << "Spatial_Function(";

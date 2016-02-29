@@ -1,5 +1,5 @@
 /**
- * @file    feature_spatial_function_merge_objects.cc
+ * @file    feature_spatial_function_merge_partially_known_spatial_functions.cc
  * @author  Thomas M. Howard (tmhoward@csail.mit.edu)
  *          Matthew R. Walter (mwalter@csail.mit.edu)
  * @version 1.0
@@ -33,37 +33,36 @@
 
 #include <sstream>
 
-#include "h2sl/object.h"
 #include "h2sl/spatial_function.h"
-#include "h2sl/feature_spatial_function_merge_objects.h"
+#include "h2sl/feature_spatial_function_merge_partially_known_spatial_functions.h"
 
 using namespace std;
 using namespace h2sl;
 
-Feature_Spatial_Function_Merge_Objects::
-Feature_Spatial_Function_Merge_Objects( const bool& invert ) : Feature( invert ) {
+Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions::
+Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions( const bool& invert ) : Feature( invert ) {
 
 }
 
-Feature_Spatial_Function_Merge_Objects::
-~Feature_Spatial_Function_Merge_Objects() {
+Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions::
+~Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions() {
 
 }
 
-Feature_Spatial_Function_Merge_Objects::
-Feature_Spatial_Function_Merge_Objects( const Feature_Spatial_Function_Merge_Objects& other ) : Feature( other ) {
+Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions::
+Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions( const Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions& other ) : Feature( other ) {
 
 }
 
-Feature_Spatial_Function_Merge_Objects&
-Feature_Spatial_Function_Merge_Objects::
-operator=( const Feature_Spatial_Function_Merge_Objects& other ) {
+Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions&
+Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions::
+operator=( const Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions& other ) {
   _invert = other._invert;
   return (*this);
 }
 
 bool
-Feature_Spatial_Function_Merge_Objects::
+Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions::
 value( const unsigned int& cv,
         const Grounding* grounding,
         const vector< pair< const Phrase*, vector< Grounding* > > >& children,
@@ -72,38 +71,31 @@ value( const unsigned int& cv,
   const Spatial_Function * spatial_function = dynamic_cast< const Spatial_Function* >( grounding );
   if( spatial_function != NULL ){
     std::vector< const Spatial_Function* > known_spatial_function_type_and_unknown_object_type;
-    std::vector< const Object* > known_object_type;
+    std::vector< const Spatial_Function* > known_object_type_and_unknown_spatial_function_type;
     for( unsigned int i = 0; i < children.size(); i++ ){
       for( unsigned int j = 0; j < children[ i ].second.size(); j++ ){
-        if( dynamic_cast< const Object* >( children[ i ].second[ j ] ) ) {
-          const Object * child = dynamic_cast< const Object* >( children[ i ].second[ j ] );
-          if( child != NULL ){
-            if( child->type() != OBJECT_TYPE_UNKNOWN ) {
-              known_object_type.push_back( child );
-            }
+        const Spatial_Function * child = dynamic_cast< const Spatial_Function* >( children[ i ].second[ j ] );
+        if( child != NULL ){
+          if( ( false == spatial_function->contains_object_type( OBJECT_TYPE_UNKNOWN ) ) && ( child->type() == SPATIAL_FUNC_TYPE_UNKNOWN ) ){
+            known_object_type_and_unknown_spatial_function_type.push_back( child );
+          } else if( ( true == spatial_function->contains_object_type( OBJECT_TYPE_UNKNOWN ) ) && ( child->type() != SPATIAL_FUNC_TYPE_UNKNOWN ) ){
+            known_spatial_function_type_and_unknown_object_type.push_back( child );
           }
-        } else if( dynamic_cast< const Spatial_Function* >( children[ i ].second[ j ] ) ) {
-          const Spatial_Function * child = dynamic_cast< const Spatial_Function* >( children[ i ].second[ j ] );
-          if( child->objects().size() == 1 ) {
-            if( child->objects()[ 0 ].type() == OBJECT_TYPE_UNKNOWN ) {
-              known_spatial_function_type_and_unknown_object_type.push_back( child );
-            }
-          }
-        }  
+        }
       }
     }
     for( unsigned int i = 0; i < known_spatial_function_type_and_unknown_object_type.size(); i++ ){
-      if( spatial_function->type() == known_spatial_function_type_and_unknown_object_type[ i ]->type() ) {
-        bool identical = true;    
-        for( unsigned int j = 0; j < known_object_type.size(); j++ ){
-          for( unsigned int k = 0; k < spatial_function->objects().size(); k++ ) {
-            if( spatial_function->objects()[ k ].type() != known_object_type[ j ]->type() ) {
+      for( unsigned int j = 0; j < known_object_type_and_unknown_spatial_function_type.size(); j++ ){
+        if( spatial_function->type() == known_spatial_function_type_and_unknown_object_type[ i ]->type() ) {
+          bool identical = true;
+          for( unsigned int k = 0; k < known_object_type_and_unknown_spatial_function_type[ j ]->objects().size(); k++ ) {
+            if( false == spatial_function->contains_object_type( known_object_type_and_unknown_spatial_function_type[ j ]->objects()[ k ].type() ) ){
               identical = false;
             }
           }
-        }
-        if( identical == true ) {
-          return !_invert;
+          if( identical ) {
+            return !_invert;
+          }
         }
       }
     }   
@@ -114,9 +106,9 @@ value( const unsigned int& cv,
 }
 
 void
-Feature_Spatial_Function_Merge_Objects::
+Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions::
 to_xml( xmlDocPtr doc, xmlNodePtr root )const{
-  xmlNodePtr node = xmlNewDocNode( doc, NULL, ( xmlChar* )( "feature_spatial_function_merge_objects" ), NULL );
+  xmlNodePtr node = xmlNewDocNode( doc, NULL, ( xmlChar* )( "feature_spatial_function_merge_partially_known_spatial_functions" ), NULL );
   stringstream invert_string;
   invert_string << _invert;
   xmlNewProp( node, ( const xmlChar* )( "invert" ), ( const xmlChar* )( invert_string.str().c_str() ) );
@@ -125,7 +117,7 @@ to_xml( xmlDocPtr doc, xmlNodePtr root )const{
 }
 
 void
-Feature_Spatial_Function_Merge_Objects::
+Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions::
 from_xml( xmlNodePtr root ){
   _invert = false;
   if( root->type == XML_ELEMENT_NODE ){
@@ -142,8 +134,8 @@ from_xml( xmlNodePtr root ){
 namespace h2sl {
   ostream&
   operator<<( ostream& out,
-              const Feature_Spatial_Function_Merge_Objects& other ) {
-    out << "Feature_Spatial_Function_Merge_Objects:(invert:(" << other.invert() << "))";
+              const Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions& other ) {
+    out << "Feature_Spatial_Function_Merge_Partially_Known_Spatial_Functions:(invert:(" << other.invert() << "))";
     return out;
   }
 

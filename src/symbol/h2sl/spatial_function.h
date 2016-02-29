@@ -55,6 +55,8 @@ namespace h2sl {
 
     bool contains_object( const Object& object ) const;
     bool contains_objects( const std::vector< Object >& objects ) const;
+    
+    bool contains_object_type( const int& type ) const;
 
     inline unsigned int& type( void ) { return _type; }; 
     inline const unsigned int& type( void ) const { return _type; };
