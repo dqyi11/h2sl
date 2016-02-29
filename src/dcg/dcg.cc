@@ -154,6 +154,9 @@ fill_search_spaces( const World* world ){
       _search_spaces.push_back( pair< unsigned int, Grounding* >( 0, new Spatial_Function( i, objects ) ) );
       child_avoid_funcs.push_back( new Spatial_Function( i, objects ) );
     }
+
+    // unknown
+    _search_spaces.push_back( pair< unsigned int, Grounding* >( 0, new Spatial_Function( SPATIAL_FUNC_TYPE_UNKNOWN, objects ) ) );
   }
 
   // UNKNOWN OBJECT FOR SPATIAL RELATION TYPE 
@@ -170,7 +173,11 @@ fill_search_spaces( const World* world ){
       objects.push_back( *( world->objects()[ j ] ) );
       _search_spaces.push_back( pair< unsigned int, Grounding* >( 0, new Spatial_Function( SPATIAL_FUNC_TYPE_IN_BETWEEN, objects ) ) );
       child_avoid_funcs.push_back( new Spatial_Function( SPATIAL_FUNC_TYPE_IN_BETWEEN, objects ) );
+
+      // unknown
+      _search_spaces.push_back( pair< unsigned int, Grounding* >( 0, new Spatial_Function( SPATIAL_FUNC_TYPE_UNKNOWN, objects ) ) );
     }
+
   }
   
   for( unsigned int i = 0; i < child_avoid_funcs.size(); i ++ ) {

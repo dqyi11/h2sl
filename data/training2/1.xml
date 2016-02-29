@@ -46,14 +46,18 @@
         <PP>
           <grounding>
             <grounding_set>
-              <object name="o0" type="table"/>
+              <spatial_function type="na">
+                <object name="o0" type="table"/>
+              </spatial_function>
             </grounding_set>
           </grounding>
           <IN text="of"/>
           <NP>
             <grounding>
               <grounding_set>
-                <object name="o0" type="table"/>
+                <spatial_function type="na">
+                  <object name="o0" type="table"/>
+                </spatial_function>
               </grounding_set>
             </grounding>
             <DT text="the"/>

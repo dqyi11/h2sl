@@ -36,28 +36,26 @@ value( const unsigned int& cv,
        const vector< pair< const Phrase*, vector< Grounding* > > >& children,
        const Phrase* phrase,
        const World* world ){
-  const Spatial_Function * spatial_function = dynamic_cast< const Spatial_Function* >( grounding );
-  if( spatial_function != NULL ){
-    bool found_match = false;
-    for( unsigned int i = 0; i < children.size(); i++ ){
-      for( unsigned int j = 0; j < children[ i ].second.size(); j++ ){
-        const Object * child = dynamic_cast< const Object* >( children[ i ].second[ j ] );
-        if( child != NULL ){
-          for( unsigned int k = 0; k < spatial_function->objects().size(); k++ ) {
-            if( spatial_function->objects()[ k ] == *child ){
-              found_match = true;
+    const Spatial_Function * spatial_function = dynamic_cast< const Spatial_Function* >( grounding );
+    if( spatial_function != NULL ){
+      bool found_match = true;
+      for( unsigned int i = 0; i < children.size(); i++ ){
+        for( unsigned int j = 0; j < children[ i ].second.size(); j++ ){
+          const Spatial_Function * child = dynamic_cast< const Spatial_Function* >( children[ i ].second[ j ] );
+          if( child != NULL ){
+            if( false == spatial_function->contains_objects( child->objects() ) ) {
+              found_match = false;
             }
           }
         }
       }
+      if( found_match ){
+        return !_invert;
+      } else {
+        return _invert;
+      }
     }
-    if( found_match ){
-      return !_invert;
-    } else {
-      return _invert;
-    }
-  }
-  return false;
+    return false;
 
 }
 

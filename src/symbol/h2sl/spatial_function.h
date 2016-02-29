@@ -53,6 +53,9 @@ namespace h2sl {
     virtual void from_xml( xmlNodePtr root );
     static void from_xml( xmlNodePtr root, Spatial_Function* p_func );
 
+    bool contains_object( const Object& object ) const;
+    bool contains_objects( const std::vector< Object >& objects ) const;
+
     inline unsigned int& type( void ) { return _type; }; 
     inline const unsigned int& type( void ) const { return _type; };
     inline std::vector< Object >&  objects( void ) { return _objects; };

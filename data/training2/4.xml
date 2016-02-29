@@ -41,15 +41,19 @@
         <NP>
           <grounding>
             <grounding_set>
-              <object name="o0" type="table"/>
-              <object name="o1" type="box"/>
+              <spatial_function type="na">
+                <object name="o0" type="table"/>
+                <object name="o1" type="box"/>
+              </spatial_function>
             </grounding_set>
           </grounding>
           <CC text="and"/>
           <NP>
             <grounding>
               <grounding_set>
-                <object name="o0" type="table"/>
+                <spatial_function type="na">
+                  <object name="o0" type="table"/>
+                </spatial_function>
               </grounding_set>
             </grounding>
             <DT text="the"/>
@@ -58,7 +62,9 @@
           <NP>
             <grounding>
               <grounding_set>
-                <object name="o1" type="box"/>
+                <spatial_function type="na">
+                  <object name="o1" type="box"/>
+                </spatial_function>
               </grounding_set>
             </grounding>
             <DT text="the"/>

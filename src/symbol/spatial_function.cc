@@ -49,10 +49,8 @@ bool Spatial_Function::operator==( const Spatial_Function& other ) const {
   } else if ( _objects.size() != other._objects.size() ) {
     return false;
   } else {
-    for( unsigned int i = 0; i < _objects.size(); i ++ ) {
-      if( _objects[ i ] != other._objects[ i ] ) {
-        return false;
-      }   
+    if( contains_objects( other.objects() )  ) {
+      return false;
     }
     return true;
   }
@@ -175,6 +173,26 @@ void Spatial_Function::from_xml( xmlNodePtr node, Spatial_Function* p_func ) {
 
 void Spatial_Function::from_xml( xmlNodePtr root ) {
   from_xml( root, this );
+}
+
+bool Spatial_Function::contains_object( const Object& object ) const {
+  for( unsigned int i = 0; i < _objects.size(); i++ ) {
+    Object obj = _objects[ i ];
+    if( obj == object ) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool Spatial_Function::contains_objects( const std::vector< Object >& objects ) const {
+  bool contain = true;
+  for( unsigned int j = 0; j < objects.size(); j ++ ) {
+    if( false == contains_object( objects[ j ] ) ) {
+      contain = false;
+    } 
+  }
+  return contain;
 }
 
 namespace h2sl {

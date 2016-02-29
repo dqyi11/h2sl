@@ -29,6 +29,7 @@ set(HDRS
     h2sl/feature_spatial_function_object.h
     h2sl/feature_spatial_function_matches_child.h
     h2sl/feature_spatial_function_object_matches_child.h
+    h2sl/feature_spatial_function_object_contains_child.h
     h2sl/feature_spatial_function_child_matches_child.h
     h2sl/feature_spatial_function_merge_objects.h
     h2sl/feature_product.h
@@ -60,6 +61,7 @@ set(SRCS
     feature_spatial_function_object.cc
     feature_spatial_function_matches_child.cc
     feature_spatial_function_object_matches_child.cc
+    feature_spatial_function_object_contains_child.cc
     feature_spatial_function_child_matches_child.cc
     feature_spatial_function_merge_objects.cc
     feature_product.cc

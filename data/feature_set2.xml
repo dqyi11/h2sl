@@ -163,6 +163,7 @@
         <feature_spatial_function_object invert="0" object_type="18"/>
         <feature_spatial_function_matches_child invert="0"/>
         <feature_spatial_function_object_matches_child invert="0"/>
+        <feature_spatial_function_object_contains_child invert="0"/>
         <feature_spatial_function_child_matches_child invert="0"/>
         <feature_spatial_function_merge_objects invert="0"/>
         <feature_spatial_function_merge_objects invert="1"/>
