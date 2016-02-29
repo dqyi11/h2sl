@@ -44,7 +44,11 @@ Spatial_Function& Spatial_Function::operator=( const Spatial_Function& other ) {
 bool Spatial_Function::operator==( const Spatial_Function& other ) const {
   if( _type != other._type ) {
     return false;
-  } else if ( _p_child_function != other._p_child_function ) {
+  } else if ( ( _p_child_function == NULL && other._p_child_function != NULL ) 
+              || ( other._p_child_function == NULL && _p_child_function != NULL ) ) { 
+    return false;
+  } else if ( _p_child_function != NULL && other._p_child_function != NULL
+              && (*_p_child_function) != (*other._p_child_function) ) {
     return false;
   } else if ( _objects.size() != other._objects.size() ) {
     return false;

@@ -74,6 +74,12 @@
         <feature_word invert="0" pos="VB" text="exit"/>
         <feature_word invert="0" pos="VB" text="swing"/>
         <feature_word invert="0" pos="IN" text="between"/>
+        <feature_word invert="0" pos="NN" text="top"/>
+        <feature_word invert="0" pos="NN" text="bottom"/>
+        <feature_word invert="0" pos="VB" text="avoid"/>
+        <feature_word invert="0" pos="VB" text="stay"/>
+        <feature_word invert="0" pos="VBG" text="going"/>
+        <feature_word invert="0" pos="RP" text="away"/>
         <feature_num_words invert="0" num_words="0"/>
       </feature_group>
       <feature_group>
