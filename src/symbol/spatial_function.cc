@@ -49,7 +49,7 @@ bool Spatial_Function::operator==( const Spatial_Function& other ) const {
   } else if ( _objects.size() != other._objects.size() ) {
     return false;
   } else {
-    if( contains_objects( other.objects() )  ) {
+    if( false == contains_objects( other.objects() )  ) {
       return false;
     }
     return true;

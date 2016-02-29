@@ -43,6 +43,8 @@
             <grounding_set>
               <spatial_function type="na">
                 <object name="o0" type="table"/>
+              </spatial_function>
+              <spatial_function type="na">
                 <object name="o1" type="box"/>
               </spatial_function>
             </grounding_set>
