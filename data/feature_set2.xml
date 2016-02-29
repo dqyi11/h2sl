@@ -169,9 +169,13 @@
         <feature_spatial_function_object invert="0" object_type="17"/>
         <feature_spatial_function_object invert="0" object_type="18"/>
         <feature_spatial_function_matches_child invert="0"/>
+        <feature_spatial_function_matches_child invert="1"/>
         <feature_spatial_function_object_matches_child invert="0"/>
+        <feature_spatial_function_object_matches_child invert="1"/>
         <feature_spatial_function_object_contains_child invert="0"/>
+        <feature_spatial_function_object_contains_child invert="1"/>
         <feature_spatial_function_child_matches_child invert="0"/>
+        <feature_spatial_function_child_matches_child invert="1"/>
         <feature_spatial_function_merge_partially_known_spatial_functions invert="0"/>
         <feature_spatial_function_merge_partially_known_spatial_functions invert="1"/>
       </feature_group>

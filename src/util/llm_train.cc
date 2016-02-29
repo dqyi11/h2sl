@@ -145,9 +145,6 @@ evaluate_cv( const Grounding* grounding,
       if( dynamic_cast< const Spatial_Function* >( groundingSet->groundings()[ i ] ) ){
         const Spatial_Function* other_spatial_function_grounding = dynamic_cast< const Spatial_Function* >( groundingSet->groundings()[ i ] );
         if( *spatial_function_grounding == *other_spatial_function_grounding ){
-          cout << "FIND SAME SPATIAL FUNCTION " << endl;
-          cout << *spatial_function_grounding << endl;
-          cout << *other_spatial_function_grounding << endl;
           cv = CV_TRUE;
         }  
       }
