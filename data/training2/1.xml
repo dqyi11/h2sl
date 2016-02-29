@@ -10,7 +10,7 @@
     <grounding>
       <grounding_set>
         <spatial_function type="left_of">
-          <object name="o2" type="table"/>
+          <object name="o0" type="table"/>
         </spatial_function>
       </grounding_set>
     </grounding>
@@ -19,7 +19,7 @@
       <grounding>
         <grounding_set>
           <spatial_function type="left_of">
-            <object name="o2" type="table"/>
+            <object name="o0" type="table"/>
           </spatial_function>
         </grounding_set>
       </grounding>
@@ -28,7 +28,7 @@
         <grounding>
           <grounding_set>
             <spatial_function type="left_of">
-              <object name="o2" type="table"/>
+              <object name="o0" type="table"/>
             </spatial_function>
           </grounding_set>
         </grounding>
