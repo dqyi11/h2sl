@@ -32,6 +32,7 @@
  */
 
 #include <sstream>
+#include <assert.h>
 
 #include "h2sl/spatial_function.h"
 #include "h2sl/feature_spatial_function_merge_partially_known_spatial_functions.h"
@@ -69,38 +70,40 @@ value( const unsigned int& cv,
         const Phrase* phrase,
         const World* world ){
   const Spatial_Function * spatial_function = dynamic_cast< const Spatial_Function* >( grounding );
-  if( spatial_function != NULL ){
+  if( ( spatial_function != NULL ) && ( children.size() > 1 ) ){
     std::vector< const Spatial_Function* > known_spatial_function_type_and_unknown_object_type;
     std::vector< const Spatial_Function* > known_object_type_and_unknown_spatial_function_type;
     for( unsigned int i = 0; i < children.size(); i++ ){
       for( unsigned int j = 0; j < children[ i ].second.size(); j++ ){
         const Spatial_Function * child = dynamic_cast< const Spatial_Function* >( children[ i ].second[ j ] );
         if( child != NULL ){
-          if( ( false == spatial_function->contains_object_type( OBJECT_TYPE_UNKNOWN ) ) && ( child->type() == SPATIAL_FUNC_TYPE_UNKNOWN ) ){
+          if( ( !child->contains_object_type( OBJECT_TYPE_UNKNOWN ) ) && ( child->type() == SPATIAL_FUNC_TYPE_UNKNOWN ) ){
             known_object_type_and_unknown_spatial_function_type.push_back( child );
-          } else if( ( true == spatial_function->contains_object_type( OBJECT_TYPE_UNKNOWN ) ) && ( child->type() != SPATIAL_FUNC_TYPE_UNKNOWN ) ){
+          } else if( ( true == child->contains_object_type( OBJECT_TYPE_UNKNOWN ) ) && ( child->type() != SPATIAL_FUNC_TYPE_UNKNOWN ) ){
             known_spatial_function_type_and_unknown_object_type.push_back( child );
           }
         }
       }
     }
-    for( unsigned int i = 0; i < known_spatial_function_type_and_unknown_object_type.size(); i++ ){
-      for( unsigned int j = 0; j < known_object_type_and_unknown_spatial_function_type.size(); j++ ){
-        if( spatial_function->type() == known_spatial_function_type_and_unknown_object_type[ i ]->type() ) {
-          bool identical = true;
-          for( unsigned int k = 0; k < known_object_type_and_unknown_spatial_function_type[ j ]->objects().size(); k++ ) {
-            if( false == spatial_function->contains_object_type( known_object_type_and_unknown_spatial_function_type[ j ]->objects()[ k ].type() ) ){
-              identical = false;
+    if( !known_spatial_function_type_and_unknown_object_type.empty() && !known_object_type_and_unknown_spatial_function_type.empty() ){ 
+      for( unsigned int i = 0; i < known_spatial_function_type_and_unknown_object_type.size(); i++ ){
+        for( unsigned int j = 0; j < known_object_type_and_unknown_spatial_function_type.size(); j++ ){
+          if( spatial_function->type() == known_spatial_function_type_and_unknown_object_type[ i ]->type() ) {
+            bool identical = true;
+            for( unsigned int k = 0; k < known_object_type_and_unknown_spatial_function_type[ j ]->objects().size(); k++ ) {
+              if( false == spatial_function->contains_object_type( known_object_type_and_unknown_spatial_function_type[ j ]->objects()[ k ].type() ) ){
+                identical = false;
+              }
+            }
+            if( identical ) {
+              return !_invert;
             }
           }
-          if( identical ) {
-            return !_invert;
-          }
         }
-      }
-    }   
+      }   
        
-    return _invert;
+      return _invert;
+    }
   }
   return false;
 }

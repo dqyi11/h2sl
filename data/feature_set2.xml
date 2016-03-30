@@ -20,6 +20,7 @@
         <feature_word invert="0" pos="IN" text="from"/>
         <feature_word invert="0" pos="IN" text="behind"/>
         <feature_word invert="0" pos="IN" text="on"/>
+        <feature_word invert="0" pos="IN" text="between"/>
         <feature_word invert="0" pos="NN" text="robot"/>
         <feature_word invert="0" pos="NN" text="box"/>
         <feature_word invert="0" pos="NN" text="bottle"/>

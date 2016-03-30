@@ -215,7 +215,6 @@ main( int argc,
         } else {
           cout << "  did not find match" << endl;
           num_incorrect++;
-          exit(0);
         }
       }
     } else {

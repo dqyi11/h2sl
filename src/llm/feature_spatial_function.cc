@@ -88,7 +88,7 @@ namespace h2sl {
   ostream&
   operator<<( ostream& out,
               const Feature_Spatial_Function& other ) {
-    out << "Feature_Spatial_Function:(invert:(" << other.invert() << ") object_type:(" << Spatial_Function::type_to_std_string( other.spatial_function_type() ) << "))";
+    out << "Feature_Spatial_Function:(invert:(" << other.invert() << ") spatial_function_type:(" << Spatial_Function::type_to_std_string( other.spatial_function_type() ) << "))";
     return out;
   }
 

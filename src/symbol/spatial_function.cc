@@ -201,8 +201,7 @@ bool Spatial_Function::contains_objects( const std::vector< Object >& objects ) 
 
 bool Spatial_Function::contains_object_type( const int& type ) const {
   for( unsigned int i = 0; i < _objects.size(); i++ ) {
-    Object obj = _objects[ i ];
-    if( obj.type() == type ) {
+    if( _objects[ i ].type() == type ) {
       return true;
     }
   }
